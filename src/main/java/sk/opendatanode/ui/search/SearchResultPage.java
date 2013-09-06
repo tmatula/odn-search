@@ -1,11 +1,20 @@
-/*
- * Copyright (C) 2012 Martin Virag <martin.virag@eea.sk> This file is part of Open Data Node. Open Data Node is free
- * software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or (at your option) any later version. Open Data Node
- * is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should
- * have received a copy of the GNU General Public License along with Open Data Node. If not, see
- * <http://www.gnu.org/licenses/>.
+/* Copyright (C) 2012 Martin Virag <martin.virag@eea.sk>
+ * Copyright (C) 2013 Tomas Matula <tomas.matula@eea.sk>
+ *
+ * This file is part of Open Data Node.
+ *
+ * Open Data Node is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Open Data Node is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Open Data Node.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package sk.opendatanode.ui.search;
@@ -30,10 +39,10 @@ public class SearchResultPage extends Panel {
 
     private static final long serialVersionUID = 1965617550606209510L;
     private List<SolrDocument> resultList = new ArrayList<SolrDocument>();
-
+    
     public SearchResultPage(String id, PageParameters parameters, QueryResponse response) {
         super(id);
-
+    
         resultList.addAll(response.getResults());
         
         add(new FacetPanel("facet", parameters, response.getFacetQuery()));
@@ -59,10 +68,8 @@ public class SearchResultPage extends Panel {
             int index = item.getIndex() + 1;
 
             item.add(new Label("itemNumber", index + ". "));
-            item.add(new ExternalLink("itemUrl", "http://localhost:8080/item/" + solrResultItem.get("id"),
-            getLabel(solrResultItem)));          
-//            item.add(new ExternalLink("itemUrl", "http://www.opendata.sk/item/" + solrResultItem.get("id"),
-//                    getLabel(solrResultItem)));
+            
+            item.add(new ExternalLink("itemUrl", "item/" + solrResultItem.get("id"), getLabel(solrResultItem)));          
         }
 
         private String getLabel(SolrDocument solrResultItem) {
@@ -80,6 +87,5 @@ public class SearchResultPage extends Panel {
             }
             return null;
         }
-
     }
 }
